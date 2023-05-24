@@ -47,6 +47,7 @@ void setup()
   irrecv.setTolerance(kTolerancePercentage); // Override the default tolerance.
   irrecv.enableIRIn();                       // Start the receiver
   init_display();
+  process.display_ststus();
 }
 
 // The repeating section of the code

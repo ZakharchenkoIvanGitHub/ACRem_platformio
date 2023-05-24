@@ -18,6 +18,8 @@ public:
     new_status.temp = 25;
     new_status.fan = Quiet;
     new_status.swing_v = Auto_swing;
+    
+   
   };
 
   // обработка тактов
@@ -44,6 +46,10 @@ public:
       new_data = false;
       processing();
     }
+  }
+
+  void display_ststus(){
+    output_status(status);
   }
 
 private:
