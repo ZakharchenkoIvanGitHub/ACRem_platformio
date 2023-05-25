@@ -30,7 +30,7 @@ enum Swing_v
     Auto_swing
 };
 
-struct Status
+struct ACStatus
 {
     Power power;
     Mode mode;

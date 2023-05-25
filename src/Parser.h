@@ -1,7 +1,7 @@
 class Parser
 {
 public:
-    Status get_status(String data, Status stat)
+    ACStatus get_status(String data, ACStatus stat)
     {
         _status = stat;
 
@@ -43,7 +43,7 @@ public:
     }
 
 private:
-    Status _status;
+    ACStatus _status;
 
     char *get_in_bracket(char *value)
     {

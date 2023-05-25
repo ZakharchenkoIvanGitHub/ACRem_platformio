@@ -31,7 +31,7 @@ void init_display()
       u8g2_prepare();
 }
 
-void output_status(Status status)
+void output_status(ACStatus status)
 {
 
       u8g2.clearBuffer();

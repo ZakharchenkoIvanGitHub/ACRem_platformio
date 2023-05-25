@@ -4,7 +4,7 @@
 class Process
 {
 public:
-  Process()
+  void init_process()
   {
 
     status.power = off;
@@ -19,6 +19,8 @@ public:
     new_status.fan = Quiet;
     new_status.swing_v = Auto_swing;
     
+    db.init_db();
+    db.db_get_status();
    
   };
 
@@ -54,9 +56,9 @@ public:
 
 private:
   Parser parser;
-  Status status;
-  Status new_status;
-  
+  ACStatus status;
+  ACStatus new_status;
+  Db db;
 
   bool new_data;
 

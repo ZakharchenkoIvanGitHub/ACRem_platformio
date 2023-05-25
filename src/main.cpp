@@ -8,7 +8,10 @@
 
 #include "ACEnum.h"
 #include "Display.h"
+#include "db_sqlite.h"
 #include "Process.h"
+
+
 // ==================== start of TUNEABLE PARAMETERS ====================
 
 const uint16_t kRecvPin = 14;
@@ -27,7 +30,9 @@ const uint8_t kTolerancePercentage = kTolerance; // kTolerance is normally 25%
 // Use turn on the save buffer feature for more complete capture coverage.
 IRrecv irrecv(kRecvPin, kCaptureBufferSize, kTimeout, true);
 decode_results results; // Somewhere to store the results
+
 Process process;
+
 // This section of code runs only once at start-up.
 void setup()
 {
@@ -46,7 +51,10 @@ void setup()
 #endif                                       // DECODE_HASH
   irrecv.setTolerance(kTolerancePercentage); // Override the default tolerance.
   irrecv.enableIRIn();                       // Start the receiver
+
+ 
   init_display();
+  process.init_process();
   process.display_ststus();
 }
 
