@@ -55,7 +55,7 @@ public:
 
 private:
 
-    ACStatus db_status;
+    static ACStatus db_status;
     sqlite3 *db;
     const char *data = "Callback function called";
     char *zErrMsg = 0;
@@ -102,7 +102,7 @@ private:
             }
         }
 
-       // db_status.temp = temper;
+      // db_status.temp = temper;
         return 0;
     }
 

@@ -1,6 +1,10 @@
 
 #include "Parser.h"
-
+#include "NTCtemperature.h"
+#include "StepSwing.h"
+NTC air_therm(32, 10000, 4600,25,9780); //инициализация датчика температуры воздуха
+NTC ref_therm(33, 10000, 4600,25,9780); //инициализация датчика температуры хладогена
+StepSwing swing (17,5,18,19); //инициализация шторки
 class Process
 {
 public:
@@ -18,6 +22,8 @@ public:
     new_status.temp = 25;
     new_status.fan = Quiet;
     new_status.swing_v = Auto_swing;
+
+    temper_timer = millis();
     
     db.init_db();
     db.db_get_status();
@@ -48,6 +54,28 @@ public:
       new_data = false;
       processing();
     }
+
+    if (millis()-temper_timer>1000&&status.power == on){ //запрос температуры с датчиков
+      temper_timer = millis();
+      Serial.print("Воздух ");
+      Serial.print(air_therm.getTemp());
+      Serial.println(" *C");
+
+      Serial.print("Хладоген ");
+      Serial.print(ref_therm.getTemp());
+      Serial.println(" *C");
+
+      Serial.println("*****");
+    }
+
+    if (status.power == on && status.swing_v == Auto_swing){
+      
+      swing.run_swing();
+    }
+    else swing.parking();
+    
+   
+
   }
 
   void display_ststus(){
@@ -59,6 +87,14 @@ private:
   ACStatus status;
   ACStatus new_status;
   Db db;
+  unsigned long temper_timer;
+  
+ 
+
+ // GyverNTC Air_temper(32, 10000, 4600,25,9780);
+  //NTC Ref_temper(32, 10000, 4600,25,9780);
+
+
 
   bool new_data;
 
